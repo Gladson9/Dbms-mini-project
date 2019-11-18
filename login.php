@@ -43,7 +43,7 @@
                         $usernm = $_POST['usernm'];
                         $pass = $_POST['pass'];
                         $user_type = $_POST['user-type'];
-                        $quer = "SELECT * from register WHERE username='$usernm' AND password='$pass' AND user_type='$user_type'";
+                        $quer = "SELECT * from login_details WHERE username='$usernm' AND passwrd='$pass' AND user_type='$user_type'";
                         $query_ru = mysqli_query($con,$quer);
                         if(mysqli_num_rows($query_ru)>0){
                             $_SESSION['usernm']=$usernm;
@@ -111,14 +111,25 @@
 
                         if($password == $cpassword){
                             
-                            $query = "select * from register WHERE username='$username'";
+                            $query = "select * from login_details WHERE username='$username'";
                             $query_run = mysqli_query($con,$query);
 
                             if(mysqli_num_rows($query_run)>0){
-                                echo '<script type="text/javascript"> alert("User already exists..")</script>';
+                                echo '<script type="text/javascript"> alert("User already exists..or try with a new username")</script>';
                             }
                             {
-                                $query = "insert into register values('$name','$email','$password','$contact','$gender','$address','$username','$user_type_r')";
+                                // if the user is a student adding details to student_details table
+                                if($user_type_r == 'student'){
+
+                                    $query = "insert into student_details values('$username','$name','$email','$contact','$gender','$address')";
+                                    $query_run = mysqli_query($con,$query);
+                                }
+                                else{
+                                    // if user is a organizer ,adding details to organizer_details table
+                                    $query = "insert into organizer_details values('$username','$name','$email','$contact','$gender','$address')";
+                                    $query_run = mysqli_query($con,$query);
+                                }
+                                $query= "insert into login_details values('$username','$password','$user_type_r')";
                                 $query_run = mysqli_query($con,$query);
                             }
                             if($query_run){
