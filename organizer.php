@@ -70,8 +70,28 @@
                 <th>College Name</th>
                 <th>Event Date</th>
             </tr>
+            <!-- displaying data in webpage -->
+            <?php
+                $query = "SELECT event_id,event_name,college_name,event_date from event_details ";
+                $query_run = mysqli_query($con,$query);
+                while($row = mysqli_fetch_array($query_run, MYSQLI_ASSOC)){
+                    echo "<tr><td>";
+                    echo $row['event_id'];
+                    echo "</td><td>";
+                    echo $row['event_name'];
+                    echo "</td><td>";
+                    echo $row['college_name'];
+                    echo "</td><td>";
+                    echo $row['event_date'];
+                    echo "</td></tr>";
+
+
+                }
+            ?>
         </table>
     </div>
+
+
 </body>
 
 </html>
