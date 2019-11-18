@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0;
 }
+body {
+  color: #ffffff;
+}
 
 .container {
   display: flex;
@@ -15,6 +18,7 @@
 .login-form {
   margin-top: 50%;
   transform: translateY(-70%);
+  color: #ffffff;
 }
 #login h1 {
   color: #86c323;
@@ -49,37 +53,37 @@
 #signup {
   background-color: #86c323;
 }
-.signup-form{
-    margin-top: 50%;
-    transform: translateY(-70%);
+.signup-form {
+  margin-top: 50%;
+  transform: translateY(-70%);
 }
 
 .input {
-    width: 300px;
-    height: 30px;
-    margin: 10px;
-    border: none;
-    background: inherit;
-    border-bottom: 2px solid #000000;
-    outline: none;
-    color: #000000;
-  }
-.input::placeholder{
-    color: #ffffff;
-    opacity: 0.7;
+  width: 300px;
+  height: 30px;
+  margin: 10px;
+  border: none;
+  background: inherit;
+  border-bottom: 2px solid #000000;
+  outline: none;
+  color: #000000;
 }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+.input::placeholder {
+  color: #ffffff;
+  opacity: 0.7;
 }
-#signup .btn{
-
-    background-color: #000000;
-    color: #86c323;
-    border: none;
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#signup .btn {
+  background-color: #000000;
+  color: #86c323;
+  border: none;
   width: 100px;
   height: 45px;
   border-radius: 25px;
   outline: none;
 }
+

@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body{
+    background: url(../img/background.jpg) no-repeat fixed center;
+    background-size: cover;
+    
+}
+h1,h2{
+    color: #ffffff;
+}
+h1{
+    font-size: 70px;
+}
+
+.green{
+    color: #86c323;
+}
+.welcome{
+    
+}
