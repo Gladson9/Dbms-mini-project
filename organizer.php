@@ -12,11 +12,23 @@
     <link rel="stylesheet" href="./CSS/organizer.css">
     <script src="./JS/app.js"></script>
     <title>Orgainzer</title>
+    <style>
+        #popup {
+            margin-top: 20px;
+            outline: none;
+        }
+
+        #delete {
+            background-color: #ff0000;
+            margin-left: 10px;
+            outline: none;
+        }
+    </style>
 </head>
 
 <body>
-<!-- ADD event popup form start -->
-    <div id="abc">
+    <!-- ADD event popup form start -->
+    <div id="abc" class="box">
         <div id="popupContact">
 
             <form action="#" id="form" method="post" name="form">
@@ -34,9 +46,36 @@
         </div>
 
     </div>
-<!-- popup form end -->
-<!-- php for form -->
-<?php
+    <!-- popup form end -->
+
+    <!-- delete popup -->
+    <div id="deletepopup" class="box">
+        <div id="popupContact">
+
+            <form action="#" id="form" method="post" name="form">
+                <img id="close" src="./img/close.png" onclick="div_hide_delete()">
+                <h2>Delete Event</h2>
+                <hr>
+                <input id="event_id" name="event_id_delete" placeholder="Event ID" type="text" required>
+                <button name="delete_event" id="submit">Submit</button>
+                <!-- <a href="javascript:%20check_empty()" id="submit">Send</a> -->
+            </form>
+        </div>
+
+    </div>
+
+
+    <?php
+         if(isset($_POST['delete_event'])){
+             $event_id_delete = $_POST['event_id_delete'];
+             $quer = "DELETE from event_details WHERE event_id='$event_id_delete'";
+             $query_run = mysqli_query($con,$quer);
+         }
+    ?>
+
+    <!-- delete popup end -->
+
+    <?php
      if(isset($_POST['submit'])){
          $event_id = $_POST['event_id'];
          $event_name = $_POST['event_name'];
@@ -56,12 +95,10 @@
          }
      }
 ?>
-<!-- php popup end -->
+    <!-- php popup end -->
 
     <h1>ADD or View Events</h1>
-    <center>
-        <button id="popup" onclick="div_show()">Add Event</button>
-    </center>
+
     <div class="table">
         <table width="100%" border="2px solid black">
             <tr>
@@ -84,14 +121,23 @@
                     echo "</td><td>";
                     echo $row['event_date'];
                     echo "</td></tr>";
-
-
                 }
             ?>
         </table>
     </div>
 
 
+
+
+
+
+
+    <center>
+        <button id="popup" onclick="div_show()">Add Event</button>
+        <button id="delete" onclick="show_delete()" name="delete_event">DELETE</button>
+    </center>
+
+   
 </body>
 
 </html>

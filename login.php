@@ -1,5 +1,6 @@
 <?php
     require 'DB/connect.php';
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +47,7 @@
                         $quer = "SELECT * from login_details WHERE username='$usernm' AND passwrd='$pass' AND user_type='$user_type'";
                         $query_ru = mysqli_query($con,$quer);
                         if(mysqli_num_rows($query_ru)>0){
-                            $_SESSION['usernm']=$usernm;
+                            $_SESSION["usernm"]=$usernm;
                             if($user_type == 'admin'){
 
                                 header('location:admin.php');
