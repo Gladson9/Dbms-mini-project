@@ -129,6 +129,7 @@
                                     // if user is a organizer ,adding details to organizer_details table
                                     $query = "insert into organizer_details values('$username','$name','$email','$contact','$gender','$address')";
                                     $query_run = mysqli_query($con,$query);
+                                    
                                 }
                                 $query= "insert into login_details values('$username','$password','$user_type_r')";
                                 $query_run = mysqli_query($con,$query);

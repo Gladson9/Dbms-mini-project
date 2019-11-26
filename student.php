@@ -18,6 +18,7 @@
             text-align: center;
         }
 
+        th,
         tr,
         td {
             padding: 5px;
@@ -29,10 +30,76 @@
         th {
             border: none;
         }
+
+        table tr:nth-child(even) {
+            background-color: #eee;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        th {
+            color: #000000;
+            background-color: #86c323;
+        }
+
+        .table {
+            background-color: inherit;
+        }
+
+        /* navigation bar */
+        nav {
+            position: absolute;
+            margin: 20px;
+            right:30px;
+            top:20px;
+        }
+
+        ul {
+            float: right;
+        }
+        
+        li {
+            
+            display: inline;
+            margin: 10px;
+            font-size: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            outline: none;
+            color: #ff0000;
+        }
+
+        /* nav end */
+
+        .table {
+             position: relative;
+        }
+
+        h2{
+            background-color:inherit;
+            color:#ffffff;
+        }
+        span{
+            color:#86c323;
+        }
     </style>
 </head>
 
 <body>
+    <h2><span>Hello</span>,
+        <?php
+        echo $_SESSION["usernm"];
+        ?>
+    </h2>
+    <nav>
+        <ul>
+            <li> <a href="./index.html">LOGOUT</a></li>
+        </ul>
+    </nav>
     <div class="table">
         <table width="100%" border="2px solid black">
             <tr>
@@ -61,7 +128,7 @@
         </table>
     </div>
 
-    
+
     <!-- ADD event popup form start -->
     <div id="abc">
         <div id="popupContact">

@@ -18,6 +18,52 @@ h1{
 .green{
     color: #86c323;
 }
-.welcome{
-    
+
+#btn{
+    width: 200px;
+    height: 35px;
+    background-color: #86c323;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#welcome{
+    width: fit-content;
+    position: absolute;
+    left: 200px;
+    top: 100px;
+}
+.intro{
+    width: fit-content;
+    position:absolute;
+    top: 200px;
+    left: 500px;
+}
+
+h2{
+    font-size: 48px;
+}
+
+/*  navigation bar*/
+nav{
+    margin: 20px;
+}
+ul{
+    color: #ffffff;
+    float: right;
+}
+
+li{
+    display: inline;
+    margin:10px;
+    font-size: 20px;
+}
+
+nav a{
+    text-decoration: none;
+    outline: none;
+    color: #ffffff;
 }

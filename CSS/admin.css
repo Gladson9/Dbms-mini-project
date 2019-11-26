@@ -1,0 +1,164 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin-top: 10px;
+  background: url(../img/background.jpg) no-repeat fixed center;
+  background-size: cover;
+}
+
+h1 {
+  text-align: center;
+  color: #ffffff;
+  flex: 0 0 100%;
+}
+
+/* navigation bar */
+nav {
+  position: absolute;
+  margin: 20px;
+  right: 30px;
+  top: 20px;
+}
+
+ul {
+  float: right;
+}
+
+li {
+  display: inline;
+  margin: 10px;
+  font-size: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  outline: none;
+  color: #ff0000;
+}
+
+/* nav end */
+
+/* button design */
+.btns {
+  text-align: center;
+}
+.btns button {
+  width: 150px;
+  height: 35px;
+  margin: 10px;
+  background: #86c323;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  outline: none;
+}
+button:hover {
+  background: #233507;
+  color: #ffffff;
+}
+/* button design end */
+
+/* table design */
+
+td {
+  text-align: center;
+}
+
+th,
+tr,
+td {
+  padding: 5px;
+}
+
+table,
+tr,
+td,
+th {
+  border: none;
+}
+
+table tr:nth-child(even) {
+  background-color: #eee;
+}
+
+table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+th {
+  color: #000000;
+  background-color: #86c323;
+}
+
+table {
+  width: 1000px;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 5%;
+  background-color: inherit;
+}
+
+/* table design  */
+/* .right{
+  height: auto;
+  width: 700px;
+  margin-left: 20px;
+} */
+
+/* form */
+#signup{
+  margin-left: 25px;
+  background-color: #86c323;
+  width: 400px;
+  height: 590px;
+}
+
+.input {
+  width: 300px;
+  height: 30px;
+  margin: 10px;
+  border: none;
+  background: inherit;
+  border-bottom: 2px solid #000000;
+  outline: none;
+  color: #000000;
+}
+
+.input::placeholder {
+  color: #ffffff;
+  opacity: 0.7;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.box {
+  /* width: 50%; */
+  height: auto;
+  text-align: center;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+#signup .btn {
+  background-color: #000000;
+  color: #86c323;
+  border: none;
+  width: 100px;
+  height: 45px;
+  border-radius: 25px;
+  outline: none;
+  margin: 5px;
+}
+
+.left{
+  margin-left: 20px;
+}

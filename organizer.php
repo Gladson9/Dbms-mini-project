@@ -13,6 +13,45 @@
     <script src="./JS/app.js"></script>
     <title>Orgainzer</title>
     <style>
+        td {
+  text-align: center;
+}
+
+th,
+tr,
+td {
+  padding: 5px;
+}
+
+table,
+tr,
+td,
+th {
+  border: none;
+}
+
+table tr:nth-child(even) {
+  background-color: #eee;
+}
+
+table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+th {
+  color: #000000;
+  background-color: #86c323;
+}
+
+.table {
+  width: 1000px;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 5%;
+  /* transform: translate(-50% -50%); */
+     background-color: inherit;
+}
+
         #popup {
             margin-top: 20px;
             outline: none;
