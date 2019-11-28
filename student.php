@@ -1,6 +1,6 @@
 <?php
-    require 'DB/connect.php';
-    session_start();
+require 'DB/connect.php';
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -10,83 +10,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./CSS/student.css">
     <title>Student</title>
     <script src="./JS/app.js"></script>
     <style>
-        td {
-            text-align: center;
-        }
-
-        th,
-        tr,
-        td {
-            padding: 5px;
-        }
-
-        table,
-        tr,
-        td,
-        th {
-            border: none;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #eee;
-        }
-
-        table tr:nth-child(odd) {
-            background-color: #fff;
-        }
-
-        th {
-            color: #000000;
-            background-color: #86c323;
-        }
-
-        .table {
-            background-color: inherit;
-        }
-
-        /* navigation bar */
-        nav {
-            position: absolute;
-            margin: 20px;
-            right:30px;
-            top:20px;
-        }
-
-        ul {
-            float: right;
-        }
-        
-        li {
-            
-            display: inline;
-            margin: 10px;
-            font-size: 20px;
-        }
-
-        nav a {
-            text-decoration: none;
-            outline: none;
-            color: #ff0000;
-        }
-
-        /* nav end */
-
-        .table {
-             position: relative;
-        }
-
-        h2{
-            background-color:inherit;
-            color:#ffffff;
-        }
-        span{
-            color:#86c323;
-        }
+        <?php include './CSS/student.css' ?>
     </style>
+    <link rel="stylesheet" href="./CSS/background.css">
 </head>
 
 <body>
@@ -97,7 +26,7 @@
     </h2>
     <nav>
         <ul>
-            <li> <a href="./index.html">LOGOUT</a></li>
+            <li> <a href="./PHP/logout.php">LOGOUT</a></li>
         </ul>
     </nav>
     <div class="table">
@@ -107,24 +36,27 @@
                 <th>Event Name</th>
                 <th>College Name</th>
                 <th>Event Date</th>
+                <th>Count of Students</th>
             </tr>
             <!-- displaying data in webpage -->
             <?php
-                        $query = "SELECT event_id,event_name,college_name,event_date from event_details ";
-                        $query_run = mysqli_query($con,$query);
-                        while($row = mysqli_fetch_array($query_run, MYSQLI_ASSOC)){
-                            echo "<tr><td>";
-                            echo $row['event_id'];
-                            echo "</td><td>";
-                            echo $row['event_name'];
-                            echo "</td><td>";
-                            echo $row['college_name'];
-                            echo "</td><td>";
-                            echo $row['event_date'];
-                            echo "</td></tr>";
-        
-                        }
-                    ?>
+            // $query = "SELECT event_id,event_name,college_name,event_date,number_of_students from event_details ";
+            $query = "CALL `display_events`()";
+            $query_run = mysqli_query($con, $query);
+            while ($row = mysqli_fetch_array($query_run, MYSQLI_ASSOC)) {
+                echo "<tr><td>";
+                echo $row['event_id'];
+                echo "</td><td>";
+                echo $row['event_name'];
+                echo "</td><td>";
+                echo $row['college_name'];
+                echo "</td><td>";
+                echo $row['event_date'];
+                echo "</td><td>";
+                echo $row['number_of_students'];
+                echo "</td></tr>";
+            }
+            ?>
         </table>
     </div>
 
@@ -154,14 +86,44 @@
     </center>
 
     <?php
-               if(isset($_POST['submit'])){
-                   $event_id = $_POST['event_id'];
-                   $username = $_SESSION["usernm"];
-                   $query = "INSERT into registered values('$username','$event_id')";
-                   $query_run = mysqli_query($con,$query);
-               } 
+    if (isset($_POST['submit'])) {
+        $event_id = $_POST['event_id'];
+        $username = $_SESSION["usernm"];
+        $query = "INSERT into registered values('$username','$event_id')";
+        $query_run = mysqli_query($con, $query);
+    }
+    ?>
+    <!-- <div class="registered_events"> -->
+    <br><br>
+    <h2>Registerd Events</h2>
+    <div class="table">
+        <table width="100%" border="2px solid black">
+            <tr>
+                <th>Event ID</th>
+                <th>Event Name</th>
+                <th>College Name</th>
+                <th>Event Date</th>
+            </tr>
+            <!-- displaying data in webpage -->
+            <?php
+            $username = $_SESSION["usernm"];
+            $query = "SELECT event_id,event_name,college_name,event_date from event_details where event_id in (select event_id from registered where username='$username')";
+            $query_run = mysqli_query($con, $query);
+            while ($row = mysqli_fetch_array($query_run, MYSQLI_ASSOC)) {
+                echo "<tr><td>";
+                echo $row['event_id'];
+                echo "</td><td>";
+                echo $row['event_name'];
+                echo "</td><td>";
+                echo $row['college_name'];
+                echo "</td><td>";
+                echo $row['event_date'];
+                echo "</td></tr>";
+            }
             ?>
-
+        </table>
+    </div>
+    <!-- </div> -->
 </body>
 
 </html>

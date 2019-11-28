@@ -109,11 +109,12 @@ table {
 } */
 
 /* form */
-#signup{
+#signup {
   margin-left: 25px;
   background-color: #86c323;
   width: 400px;
-  height: 590px;
+  /* height: 590px; */
+  height: auto;
 }
 
 .input {
@@ -137,13 +138,20 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
+#table1 #table2 #table3{
+  display: flex;
+}
 .box {
   /* width: 50%; */
   height: auto;
   text-align: center;
 }
-
+.reverse1 {
+  order: 2;
+}
+.reverse2{
+  order: 1;
+}
 .btn:hover {
   cursor: pointer;
 }
@@ -159,6 +167,23 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 5px;
 }
 
-.left{
+.left {
   margin-left: 20px;
+}
+
+tr:hover {
+  cursor: pointer;
+}
+
+#signup .red {
+  color: #ff0000;
+}
+#signup .yellow {
+  color: #ffff00;
+}
+#signup .blue {
+  color: #1d86db;
+}
+#signup .orange {
+  color: #ff7d26;
 }

@@ -29,10 +29,12 @@
                 <th>Event Name</th>
                 <th>College Name</th>
                 <th>Event Date</th>
+                <th>Count of Students</th>
             </tr>
             <!-- displaying data in webpage -->
             <?php
-                                $query = "SELECT event_id,event_name,college_name,event_date from event_details ";
+                                // $query = "SELECT event_id,event_name,college_name,event_date,number_of_students from event_details ";
+                                $query = "CALL `display_events`()";
                                 $query_run = mysqli_query($con,$query);
                                 while($row = mysqli_fetch_array($query_run, MYSQLI_ASSOC)){
                                     echo "<tr><td>";
@@ -43,6 +45,8 @@
                                     echo $row['college_name'];
                                     echo "</td><td>";
                                     echo $row['event_date'];
+                                    echo "</td><td>";
+                                    echo $row['number_of_students'];
                                     echo "</td></tr>";
                 
                                 }

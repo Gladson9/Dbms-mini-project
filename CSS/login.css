@@ -9,10 +9,12 @@ body {
 .container {
   display: flex;
 }
-.box {
+.container .box {
   width: 50%;
   height: 100vh;
   text-align: center;
+  
+  /* flex-direction: row-reverse; */
 }
 /* login side */
 .login-form {
