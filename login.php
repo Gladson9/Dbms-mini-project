@@ -89,8 +89,8 @@
                     <br>
                     <input type="number" name="contact" class="input contact" placeholder="Contact Number" required>
                     <br>
-                    <input type="radio" name="gender" value="Male" checked>Male &nbsp &nbsp
-                    <input type="radio" name="gender" value="Female">Female <br>
+                    <input type="radio" name="gender" value="male" checked>Male &nbsp &nbsp
+                    <input type="radio" name="gender" value="female">Female <br>
                     <input type="text" name="address" class="input" placeholder="Address" required>
                     <br>
                     <input type="radio" name="user-type-r" value="student" checked>Student &nbsp
@@ -101,6 +101,7 @@
                     <button class="btn" id="ba" name="signup-btn">Signup</button>
                 </form>
                 <?php
+                require 'DB/connect.php';
                     if(isset($_POST['signup-btn'])){
                         // echo '<script type="text/javascript"> alert("button working")</script>';
                         $name = $_POST['name'];
@@ -122,6 +123,8 @@
                                 echo '<script type="text/javascript"> alert("User already exists..or try with a new username")</script>';
                             }
                             {
+                                $query= "insert into login_details values('$username','$password','$user_type_r')";
+                                $query_run = mysqli_query($con,$query);
                                 // if the user is a student adding details to student_details table
                                 if($user_type_r == 'student'){
 
@@ -134,8 +137,6 @@
                                     $query_run = mysqli_query($con,$query);
                                     
                                 }
-                                $query= "insert into login_details values('$username','$password','$user_type_r')";
-                                $query_run = mysqli_query($con,$query);
                             }
                             if($query_run){
                                 echo '<script type="text/javascript"> alert("User registered..")</script>';

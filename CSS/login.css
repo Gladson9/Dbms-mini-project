@@ -56,9 +56,10 @@ body {
   background-color: #86c323;
 }
 .signup-form {
-  margin-top: 50%;
+  margin-top: 60%;
   transform: translateY(-70%);
 }
+
 
 .input {
   width: 300px;

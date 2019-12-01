@@ -62,14 +62,8 @@ session_start();
 
     </div>
 
+  
 
-    <?php
-    if (isset($_POST['delete_event'])) {
-        $event_id_delete = $_POST['event_id_delete'];
-        $quer = "DELETE from event_details WHERE event_id='$event_id_delete'";
-        $query_run = mysqli_query($con, $quer);
-    }
-    ?>
 
     <!-- delete popup end -->
 
@@ -93,16 +87,18 @@ session_start();
             echo '<script type="text/javascript"> alert("Event already exists..")</script>';
         }
     }
-    ?>
+    ?>   
     <!-- php popup end -->
     <center>
         <h1>Hello,
-        <?php
-        echo $_SESSION["usernm"];
-        ?>
+            <?php
+            echo $_SESSION["usernm"];
+            ?>
         </h1>
         <h2>Here You can Add or View Events</h2>
     </center>
+
+   
 
     <div class="table">
         <table width="100%" border="2px solid black">
@@ -133,7 +129,7 @@ session_start();
     </div>
     <center>
         <button id="popup" onclick="div_show()">Add Event</button>
-        <button id="delete" onclick="show_delete()" name="delete_event">DELETE</button>
+
         <br><br>
         <h2>Count of Student in your event</h2>
     </center>
@@ -145,6 +141,7 @@ session_start();
             </tr>
             <!-- displaying data in webpage -->
             <?php
+            require 'DB/connect.php';
             $username = $_SESSION["usernm"];
             $query = "SELECT event_id,number_of_students from event_details where event_id in (select event_id from organizer_events where username='$username')";
             $query_run = mysqli_query($con, $query);
@@ -157,8 +154,18 @@ session_start();
             }
             ?>
         </table>
-    </div>  
+    </div>
+    <center>
+        <button id="delete" onclick="show_delete()" name="delete_event">DELETE</button>
+    </center>
 
+    <?php
+    if (isset($_POST['delete_event'])) {
+        $event_id_delete = $_POST['event_id_delete'];
+        $quer = "DELETE from event_details WHERE event_id='$event_id_delete' and event_id in (select event_id from organizer_events where username='$username')";
+        $query_run = mysqli_query($con, $quer);
+    }
+    ?>
 </body>
 
 </html>

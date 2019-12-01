@@ -402,6 +402,7 @@ session_start();
                 <!-- Adding details to database -->
                 <?php
                 if (isset($_POST['add_r'])) {
+                    require 'DB/connect.php';
                     // echo '<script type="text/javascript"> alert("button working")</script>';
                     $event_id = $_POST['event_id'];
                     $username_r = $_POST['username_r'];
@@ -447,23 +448,22 @@ session_start();
                     <th>Username</th>
                     <th>Event ID</th>
                 </tr>
-                <!-- displaying data in webpage -->
+
                 <?php
-                $query = "SELECT * from registered";
-                $query_run = mysqli_query($con, $query);
-                while ($row = mysqli_fetch_array($query_run, MYSQLI_ASSOC)) {
+                require 'DB/connect.php';
+                $quer = "SELECT * FROM registered";
+                $query_r = mysqli_query($con, $quer);
+                while ($rows = mysqli_fetch_array($query_r, MYSQLI_ASSOC)) {
                     echo "<tr><td>";
-                    echo $row['username'];
+                    echo $rows['username'];
                     echo "</td><td>";
-                    echo $row['event_id'];
+                    echo $rows['event_id'];
                     echo "</td></tr>";
                 }
                 ?>
             </table>
         </div>
     </div>
-
-
 
 
 
@@ -572,8 +572,6 @@ session_start();
             document.getElementById("gender_o").value = "";
             document.getElementById("address_o").value = "";
         }
-
-        
     </script>
     <script>
         function clearContent_e() {

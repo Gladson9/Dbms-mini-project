@@ -75,6 +75,15 @@ session_start();
                     <button name="submit" id="submit">Submit</button>
                 </center>
                 <!-- <a href="javascript:%20check_empty()" id="submit">Send</a> -->
+                <?php
+                require 'DB/connect.php';
+                if (isset($_POST['submit'])) {
+                    $event_id = $_POST['event_id'];
+                    $username = $_SESSION["usernm"];
+                    $query = "INSERT into registered values('$username','$event_id')";
+                    $query_run = mysqli_query($con, $query);
+                }
+                ?>
             </form>
         </div>
 
@@ -85,14 +94,7 @@ session_start();
         <button id="register" onclick="div_show()" name="register">Register</button>
     </center>
 
-    <?php
-    if (isset($_POST['submit'])) {
-        $event_id = $_POST['event_id'];
-        $username = $_SESSION["usernm"];
-        $query = "INSERT into registered values('$username','$event_id')";
-        $query_run = mysqli_query($con, $query);
-    }
-    ?>
+
     <!-- <div class="registered_events"> -->
     <br><br>
     <h2>Registerd Events</h2>
@@ -106,6 +108,7 @@ session_start();
             </tr>
             <!-- displaying data in webpage -->
             <?php
+            require 'DB/connect.php';
             $username = $_SESSION["usernm"];
             $query = "SELECT event_id,event_name,college_name,event_date from event_details where event_id in (select event_id from registered where username='$username')";
             $query_run = mysqli_query($con, $query);
