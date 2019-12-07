@@ -1,6 +1,6 @@
 <?php
-    require 'DB/connect.php';
-    session_start();
+require 'DB/connect.php';
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -36,37 +36,33 @@
 
                     <input type="radio" name="user-type" value="organizer" class="radio" style=" margin: 0;height: 20px;width: 20px;"> &nbsp; <span style="color:#86c323">Orgainzer</span>&nbsp;&nbsp;
 
-                    <input type="radio" name="user-type" value="student" class="radio" style=" margin: 0;height: 20px;width: 20px;">&nbsp; <span  style="color:#86c323">Student</span>
+                    <input type="radio" name="user-type" value="student" class="radio" style=" margin: 0;height: 20px;width: 20px;">&nbsp; <span style="color:#86c323">Student</span>
                     <br>
                     <br>
                     <button class="btn" name="login-btn">Login</button>
                 </form>
 
                 <?php
-                    if(isset($_POST['login-btn'])){
-                        $usernm = $_POST['usernm'];
-                        $pass = $_POST['pass'];
-                        $user_type = $_POST['user-type'];
-                        $quer = "SELECT * from login_details WHERE username='$usernm' AND passwrd='$pass' AND user_type='$user_type'";
-                        $query_ru = mysqli_query($con,$quer);
-                        if(mysqli_num_rows($query_ru)>0){
-                            $_SESSION["usernm"]=$usernm;
-                            if($user_type == 'admin'){
+                if (isset($_POST['login-btn'])) {
+                    $usernm = $_POST['usernm'];
+                    $pass = $_POST['pass'];
+                    $user_type = $_POST['user-type'];
+                    $quer = "SELECT * from login_details WHERE username='$usernm' AND passwrd='$pass' AND user_type='$user_type'";
+                    $query_ru = mysqli_query($con, $quer);
+                    if (mysqli_num_rows($query_ru) > 0) {
+                        $_SESSION["usernm"] = $usernm;
+                        if ($user_type == 'admin') {
 
-                                header('location:admin.php');
-                            }
-                            else if($user_type == 'organizer'){
-                                header('location:organizer.php');
-                            }
-                            else if($user_type == 'student'){
-                                header('location:student.php');
-                            }
+                            header('location:admin.php');
+                        } else if ($user_type == 'organizer') {
+                            header('location:organizer.php');
+                        } else if ($user_type == 'student') {
+                            header('location:student.php');
                         }
-                        else
-                        {
-                            echo'<script type="text/javascript"> alert("invalid")</script>';
-                        }
+                    } else {
+                        echo '<script type="text/javascript"> alert("invalid")</script>';
                     }
+                }
                 ?>
 
             </div>
@@ -81,7 +77,7 @@
                     <br>
                     <input type="text" name="username" class="input" placeholder="Username" required>
                     <br>
-                    <input type="text" name="email" class="input" placeholder="Email" required>
+                    <input type="email" name="email" class="input" placeholder="Email" required>
                     <br>
                     <input type="password" name="password" class="input" placeholder="Password" required>
                     <br>
@@ -94,7 +90,7 @@
                     <input type="text" name="address" class="input" placeholder="Address" required>
                     <br>
                     <input type="radio" name="user-type-r" value="student" checked>Student &nbsp
-                    <input type="radio" name="user-type-r" value="organizer">Orgainzer 
+                    <input type="radio" name="user-type-r" value="organizer">Orgainzer
                     <br>
                     <br>
                     <!-- <input type="submit" name="signup-btn" value="SignUp"> -->
@@ -102,56 +98,53 @@
                 </form>
                 <?php
                 require 'DB/connect.php';
-                    if(isset($_POST['signup-btn'])){
-                        // echo '<script type="text/javascript"> alert("button working")</script>';
-                        $name = $_POST['name'];
-                        $username = $_POST['username'];
-                        $email = $_POST['email'];
-                        $password = $_POST['password'];
-                        $cpassword = $_POST['cpassword'];
-                        $contact = $_POST['contact'];
-                        $gender = $_POST['gender'];
-                        $address = $_POST['address'];
-                        $user_type_r = $_POST['user-type-r'];
+                if (isset($_POST['signup-btn'])) {
+                    // echo '<script type="text/javascript"> alert("button working")</script>';
+                    $name = $_POST['name'];
+                    $username = $_POST['username'];
+                    $email = $_POST['email'];
+                    $password = $_POST['password'];
+                    $cpassword = $_POST['cpassword'];
+                    $contact = $_POST['contact'];
+                    $gender = $_POST['gender'];
+                    $address = $_POST['address'];
+                    $user_type_r = $_POST['user-type-r'];
+                    $len = strlen((string) $contact);
+                    if ($len == '10') {
+                        if ($password == $cpassword) {
 
-                        if($password == $cpassword){
-                            
                             $query = "select * from login_details WHERE username='$username'";
-                            $query_run = mysqli_query($con,$query);
+                            $query_run = mysqli_query($con, $query);
 
-                            if(mysqli_num_rows($query_run)>0){
+                            if (mysqli_num_rows($query_run) > 0) {
                                 echo '<script type="text/javascript"> alert("User already exists..or try with a new username")</script>';
-                            }
-                            {
-                                $query= "insert into login_details values('$username','$password','$user_type_r')";
-                                $query_run = mysqli_query($con,$query);
+                            } {
+                                $query = "insert into login_details values('$username','$password','$user_type_r')";
+                                $query_run = mysqli_query($con, $query);
                                 // if the user is a student adding details to student_details table
-                                if($user_type_r == 'student'){
+                                if ($user_type_r == 'student') {
 
                                     $query = "insert into student_details values('$username','$name','$email','$contact','$gender','$address')";
-                                    $query_run = mysqli_query($con,$query);
-                                }
-                                else{
+                                    $query_run = mysqli_query($con, $query);
+                                } else {
                                     // if user is a organizer ,adding details to organizer_details table
                                     $query = "insert into organizer_details values('$username','$name','$email','$contact','$gender','$address')";
-                                    $query_run = mysqli_query($con,$query);
-                                    
+                                    $query_run = mysqli_query($con, $query);
                                 }
                             }
-                            if($query_run){
+                            if ($query_run) {
                                 echo '<script type="text/javascript"> alert("User registered..")</script>';
-
-                            }
-                            else
-                            {
+                            } else {
                                 echo ' <script type="text/javascript"> alert("User already exists.. Please Login")</script>';
                             }
-                        
-                        }
-                        else{
+                        } else {
                             echo ' <script type="text/javascript"> alert("Password does not match")</script>';
                         }
                     }
+                 else {
+                    echo '<script type=text/javascript>alert("Contact number does not contain 10 digits")</script>';
+                }
+            }
                 ?>
             </div>
         </div>

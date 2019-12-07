@@ -47,7 +47,7 @@ session_start();
                     <br>
                     <input type="text" name="username" id="username" class="input" placeholder="Username" required>
                     <br>
-                    <input type="text" name="email" id="email" class="input" placeholder="Email" required>
+                    <input type="email" name="email" id="email" class="input" placeholder="Email" required>
                     <br>
                     <input type="password" name="password" id="password" class="input" placeholder="Password">
                     <br>
@@ -78,24 +78,27 @@ session_start();
                     $username = $_POST['username'];
                     $email = $_POST['email'];
                     $password = $_POST['password'];
-                    // $cpassword = $_POST['cpassword'];
                     $contact = $_POST['contact'];
                     $gender = $_POST['gender'];
                     $address = $_POST['address'];
-                    // $user_type_r = $_POST['user-type'];
                     $query = "select * from login_details WHERE username='$username'";
                     $query_run = mysqli_query($con, $query);
-                    if (mysqli_num_rows($query_run) > 0) {
-                        echo '<script type="text/javascript"> alert("User already exists..or try with a new username")</script>';
-                    } else {
-                        // if the user is a student adding details to student_details table
-                        {
-                            $query = "insert into login_details values('$username','$password','student')";
-                            $query_run = mysqli_query($con, $query);
+                    $len = strlen((string) $contact);
+                    if ($len == '10') {
+                        if (mysqli_num_rows($query_run) > 0) {
+                            echo '<script type="text/javascript"> alert("User already exists..or try with a new username")</script>';
+                        } else {
+                            // if the user is a student adding details to student_details table
+                            {
+                                $query = "insert into login_details values('$username','$password','student')";
+                                $query_run = mysqli_query($con, $query);
 
-                            $query = "insert into student_details values('$username','$name','$email','$contact','$gender','$address')";
-                            $query_ru = mysqli_query($con, $query);
+                                $query = "insert into student_details values('$username','$name','$email','$contact','$gender','$address')";
+                                $query_ru = mysqli_query($con, $query);
+                            }
                         }
+                    } else {
+                        echo '<script type=text/javascript>alert("Contact number does not contain 10 digits")</script>';
                     }
                 }
 
@@ -118,12 +121,21 @@ session_start();
                     $contact = $_POST['contact'];
                     $gender = $_POST['gender'];
                     $address = $_POST['address'];
-
-
-                    $query = "update student_details set username='$username',name='$name',email='$email',contact='$contact',gender='$gender',address='$address' where username='$username'";
-                    $query_run = mysqli_query($con, $query);
-                    $query = "update login_details set passwrd='$password' where username='$username'";
-                    $query_run = mysqli_query($con, $query);
+                    $len = strlen((string) $contact);
+                    if ($len == '10') {
+                        $quer = "select * from student_details where username='$username'";
+                        $query_ru = mysqli_query($con, $quer);
+                        if (mysqli_num_rows($query_ru) > 0) {
+                            $query = "update student_details set username='$username',name='$name',email='$email',contact='$contact',gender='$gender',address='$address' where username='$username'";
+                            $query_run = mysqli_query($con, $query);
+                            $query = "update login_details set passwrd='$password' where username='$username'";
+                            $query_run = mysqli_query($con, $query);
+                        } else {
+                            echo '<script type="text/javascript"> alert("Enter a valid username")</script>';
+                        }
+                    } else {
+                        echo '<script type=text/javascript>alert("Contact number does not contain 10 digits")</script>';
+                    }
                 }
                 ?>
             </div>
@@ -161,7 +173,7 @@ session_start();
                     <br>
                     <input type="text" name="username_o" id="username_o" class="input" placeholder="Username" required>
                     <br>
-                    <input type="text" name="email_o" id="email_o" class="input" placeholder="Email" required>
+                    <input type="email" name="email_o" id="email_o" class="input" placeholder="Email" required>
                     <br>
                     <input type="password" name="password_o" id="password_o" class="input" placeholder="Password">
                     <br>
@@ -192,21 +204,24 @@ session_start();
                     $username_o = $_POST['username_o'];
                     $email_o = $_POST['email_o'];
                     $password_o = $_POST['password_o'];
-                    // $cpassword = $_POST['cpassword'];
                     $contact_o = $_POST['contact_o'];
                     $gender_o = $_POST['gender_o'];
                     $address_o = $_POST['address_o'];
-                    // $user_type_r = $_POST['user-type'];
                     $quer = "select * from login_details WHERE username='$username_o'";
                     $query_ru = mysqli_query($con, $quer);
-                    if (mysqli_num_rows($query_ru) > 0) {
-                        echo '<script type="text/javascript"> alert("User already exists..or try with a new username")</script>';
+                    $len = strlen((string) $contact);
+                    if ($len == '10') {
+                        if (mysqli_num_rows($query_ru) > 0) {
+                            echo '<script type="text/javascript"> alert("User already exists..or try with a new username")</script>';
+                        } else {
+                            $query = "insert into login_details values('$username_o','$password_o','organizer')";
+                            $query_run = mysqli_query($con, $query);
+                            // if the user is a student adding details to student_details table
+                            $query = "insert into organizer_details values('$username_o','$name_o','$email_o','$contact_o','$gender_o','$address_o')";
+                            $query_run = mysqli_query($con, $query);
+                        }
                     } else {
-                        $query = "insert into login_details values('$username_o','$password_o','organizer')";
-                        $query_run = mysqli_query($con, $query);
-                        // if the user is a student adding details to student_details table
-                        $query = "insert into organizer_details values('$username_o','$name_o','$email_o','$contact_o','$gender_o','$address_o')";
-                        $query_run = mysqli_query($con, $query);
+                        echo '<script type=text/javascript>alert("Contact number does not contain 10 digits")</script>';
                     }
                 }
 
@@ -229,12 +244,16 @@ session_start();
                     $contact_o = $_POST['contact_o'];
                     $gender_o = $_POST['gender_o'];
                     $address_o = $_POST['address_o'];
+                    $len = strlen((string) $contact);
+                    if ($len == '10') {
 
-
-                    $query = "update organizer_details set username='$username_o',name='$name_o',email='$email_o',contact='$contact_o',gender='$gender_o',address='$address_o' where username='$username_o'";
-                    $query_run = mysqli_query($con, $query);
-                    $query = "update login_details set passwrd='$password_o' where username='$username_o'";
-                    $query_run = mysqli_query($con, $query);
+                        $query = "update organizer_details set username='$username_o',name='$name_o',email='$email_o',contact='$contact_o',gender='$gender_o',address='$address_o' where username='$username_o'";
+                        $query_run = mysqli_query($con, $query);
+                        $query = "update login_details set passwrd='$password_o' where username='$username_o'";
+                        $query_run = mysqli_query($con, $query);
+                    } else {
+                        echo '<script type=text/javascript>alert("Contact number does not contain 10 digits")</script>';
+                    }
                 }
                 ?>
             </div>
